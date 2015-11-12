@@ -46,7 +46,7 @@ Folder structure::
 
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/wikistrap.js.png
-.. _travis: https://travis-ci.org/leocornus/wiki.js
+.. _travis: https://travis-ci.org/leocornus/wikistrap.js
 .. |npm-version| image:: https://img.shields.io/npm/v/wikistrap.js.svg
 .. _npm-version: https://www.npmjs.com/package/wikistrap.js
 .. |npm-license| image:: https://img.shields.io/npm/l/wikistrap.js.svg
