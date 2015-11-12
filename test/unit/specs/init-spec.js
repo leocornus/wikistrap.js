@@ -16,4 +16,11 @@ describe('Testing Initialization', function() {
         expect($element.attr('id')).toBe('simple');
         expect($element.attr('class')).toBe('sandbox');
     });
+
+    it('initialize the WikiStrap class', function() {
+
+        var client = new WikiStrap();
+        expect(client).not.toBe(null);
+        expect(typeof client).toBe('object');
+    });
 });
