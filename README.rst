@@ -1,3 +1,7 @@
+|travis|_ |npm-version|_ |npm-license|_
+
+|nodei|_
+
 wikistrap.js
 ============
 
@@ -39,3 +43,13 @@ Folder structure::
       |- testing-story.rst
     release-0.0.2
       |- README.rst
+
+
+.. |travis| image:: https://api.travis-ci.org/leocornus/wikistrap.js.png
+.. _travis: https://travis-ci.org/leocornus/wiki.js
+.. |npm-version| image:: https://img.shields.io/npm/v/wikistrap.js.svg
+.. _npm-version: https://www.npmjs.com/package/wikistrap.js
+.. |npm-license| image:: https://img.shields.io/npm/l/wikistrap.js.svg
+.. _npm-license: https://www.npmjs.com/package/wikistrap.js
+.. |nodei| image:: https://nodei.co/npm/wikistrap.js.png?downloads=true&downloadRank=true&stars=true
+.. _nodei: https://nodei.co/npm/wikistrap.js/
