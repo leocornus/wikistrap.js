@@ -1,0 +1,37 @@
+{
+  "name": "wikistrap.js",
+  "version": "0.0.1",
+  "description": "comprehensive JavaScript sdk to MediaWiki APIs",
+  "main": "src/wikistrap.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm gulp",
+    "gulp": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leocornus/wikistrap.js.git"
+  },
+  "keywords": [
+    "mediawiki",
+    "bootstrap",
+    "sdk"
+  ],
+  "author": "Sean Chen <sean.chen@leocorn.com> (http://github.com/seanchen)",
+  "license": "GPLv2",
+  "bugs": {
+    "url": "https://github.com/leocornus/wikistrap.js/issues"
+  },
+  "homepage": "https://github.com/leocornus/wikistrap.js#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-karma": "0.0.5",
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.13.15",
+    "karma-jasmine": "^0.3.6",
+    "karma-jasmine-jquery": "^0.1.1"
+  }
+}
