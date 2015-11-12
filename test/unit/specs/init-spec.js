@@ -4,7 +4,6 @@ describe('Testing Initialization', function() {
     var $element, element;
 
     beforeEach(function() {
-        //$ = window.jQuery();
         $element = $(simpleDiv);
         element = $element[0];
     });
