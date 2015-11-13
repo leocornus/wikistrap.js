@@ -21,5 +21,8 @@ describe('Testing Initialization', function() {
         var client = new WikiStrap();
         expect(client).not.toBe(null);
         expect(typeof client).toBe('object');
+
+        var hello = client.helloWorld();
+        expect(hello).toBe('Hello WikiStrap!');
     });
 });
