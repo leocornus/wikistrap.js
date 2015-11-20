@@ -60,4 +60,9 @@ We will
 simple e2e test
 ---------------
 
+Here are what we need for end to end testing.
 
+- web server to demo the application.
+- protractor on selenium webdrivers.
+- gulp plugins and task to make things easier.
+- gulp exit to stop web server after testing is complete.
