@@ -1,4 +1,4 @@
-describe('Empty for now', function() {
+describe('Basic specs to testing class loading', function() {
 
     beforeEach(function() {
         // load the home page.
