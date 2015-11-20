@@ -10,5 +10,8 @@ describe('Empty for now', function() {
 
         var sumDiv = element(by.id('sum'));
         expect(sumDiv.getText()).toEqual('nothing');
+        var plusButton = element(by.id('plus'));
+        plusButton.click();
+        expect(sumDiv.getText()).toEqual('Hello WikiStrap!');
     });
 });
