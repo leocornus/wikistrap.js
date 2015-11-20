@@ -10,6 +10,11 @@ describe('Empty for now', function() {
 
         var sumDiv = element(by.id('sum'));
         expect(sumDiv.getText()).toEqual('nothing');
+    });
+
+    it('should load the WikiStrap class', function() {
+
+        var sumDiv = element(by.id('sum'));
         var plusButton = element(by.id('plus'));
         plusButton.click();
         expect(sumDiv.getText()).toEqual('Hello WikiStrap!');
