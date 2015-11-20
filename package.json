@@ -21,7 +21,7 @@
     "sdk"
   ],
   "author": "Sean Chen <sean.chen@leocorn.com> (http://github.com/seanchen)",
-  "license": "GPLv2",
+  "license": "GPL-2.0",
   "bugs": {
     "url": "https://github.com/leocornus/wikistrap.js/issues"
   },
