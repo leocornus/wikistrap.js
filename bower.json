@@ -24,5 +24,8 @@
   ],
   "dependencies": {
     "jquery": "~2.1.4"
+  },
+  "devDependencies": {
+    "angular": "angularjs#~1.4.8"
   }
 }

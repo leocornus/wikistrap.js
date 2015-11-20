@@ -50,9 +50,14 @@ need initial the npm project and install basic modules::
 simple unit test
 ----------------
 
-quick unit testing uing karma runner.
+quick unit testing using karma runner.
 We will
 
 - install and set up Karma runner on jasmine spec.
 - simple test case to load jQuery lib
 - simple test case to load the WikiStrap lib.
+
+simple e2e test
+---------------
+
+
