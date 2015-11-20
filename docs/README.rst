@@ -32,9 +32,11 @@ Folder structure::
          |- specs\
          |- fixtures\
     |- e2e\
+         |- basic-load-spec.js
          |- view-page.js
          |- view-category.js
   demo\
+    |- basic-load.html
   dist\
 
 initial setup
@@ -44,3 +46,13 @@ need initial the npm project and install basic modules::
 
   $ npm init
   $ npm install gulp gulp-karma karma --save-dev
+
+simple unit test
+----------------
+
+quick unit testing uing karma runner.
+We will
+
+- install and set up Karma runner on jasmine spec.
+- simple test case to load jQuery lib
+- simple test case to load the WikiStrap lib.
