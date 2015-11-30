@@ -28,6 +28,7 @@
   "homepage": "https://github.com/leocornus/wikistrap.js#readme",
   "devDependencies": {
     "bower": "^1.6.5",
+    "express": "^4.13.3",
     "gulp": "^3.9.0",
     "gulp-karma": "0.0.5",
     "gulp-live-server": "0.0.29",
