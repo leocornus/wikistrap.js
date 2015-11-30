@@ -23,19 +23,6 @@ gulp.task('karma', function(done) {
     }, done);
 });
 
-// set up the web server for e2e testing...
-var webserver = require('gulp-webserver');
-gulp.task('webserver', function() {
-
-    return gulp.src('.').pipe(webserver({
-      host: '0.0.0.0',
-      port: 8900,
-      livereload: true,
-      directoryListing: true,
-      open: true
-    })).on('error', function(e) {throw e;});
-});
-
 // using the express to serve static files.
 var gls = require('gulp-live-server');
 // the simplest express static server.
@@ -75,11 +62,4 @@ gulp.task('protractor',
         // proper way to stop the task when error happen.
         this.emit("end");
     });
-});
-
-// the exit task will stop web server at the end of testing.
-var exit = require('gulp-exit');
-gulp.task('exit', ['protractor'], function() {
-
-    gulp.src("").pipe(exit());
 });
