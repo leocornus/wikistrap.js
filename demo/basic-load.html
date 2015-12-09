@@ -21,14 +21,14 @@ jQuery(document).ready(function() {
         // create the wiki client.
         var client = new WikiStrap();
         // update sum div with response from wiki client.
-        jQuery('#sum').html(client.helloWorld());
+        jQuery('#sum').html(client.getApiUrl());
     });
 });
     </script>
   </head>
   <body>
     <div class="container">
-      <div class="page-header"><h1>Hello Web Server</h1></div>
+      <div class="page-header"><h1>Hello WikiStrap</h1></div>
       <p><div id="sum">nothing</div></p>
       <p><button id="plus">Click Me</button></p>
     </div>
