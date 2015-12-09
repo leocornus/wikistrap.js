@@ -35,10 +35,12 @@ Quick Start
 :demo app:
   $ npm run gulp express-app
 
+  visit http://localhost:8900/demo
+
 Documentation
 -------------
 
-Check the `document folder <docs\README.rst>`_.
+Check the `document folder <docs/README.rst>`_.
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/wikistrap.js.png
 .. _travis: https://travis-ci.org/leocornus/wikistrap.js
