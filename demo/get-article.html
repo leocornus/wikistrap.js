@@ -1,0 +1,59 @@
+<html ng-app="mwdemo">
+  <head>
+    <title>MediaWiki Demo</title>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.css'/>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <script src='/src/wikistrap.js'></script>
+
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <style>
+    .affix {
+        top: 50px;
+    }
+    </style>
+    <script>
+// we need this to load protractor.
+var mwdemo = angular.module('mwdemo', []);
+
+jQuery(document).ready(function() {
+    // using the local site for testing...
+    var localSite={'baseUrl':window.location.host,
+                   'affixOffsetTop' : 290,
+                   'limit' : 290,
+                   'apiPath':'/wiki/api.php'};
+    var client = new WikiStrap(localSite);
+
+    jQuery("#load-page").click(function(event) {
+
+        var title = jQuery("#page-title").val();
+        client.getArticle(title, function(err, content) {
+            //client.log(content);
+            $('#content-container').html(content);
+            client.syncSidenavWidth();
+        });
+    });
+});
+    </script>
+  </head>
+  <body>
+<div class="container container-fluid">
+<div class="jumbotron">
+  <h1>Demonstrate Get Article</h1>
+  <p>Page Title: <input type="text" id="page-title"></input></p>
+  <p><a class="btn btn-primary btn-lg" id="load-page" href="#" 
+        role="button">
+    Load Page
+  </a></p>
+</div>
+
+<div id="content-container" class="container-fluid">
+</div>
+</div>
+  </body>
+</html>
+
