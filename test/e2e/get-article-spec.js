@@ -50,4 +50,25 @@ describe('Basic specs for getArticle', function() {
         expect(tfa.getText()).
             toEqual("From today's featured article");
     });
+
+    it('should has class affix when scroll to bottom', function() {
+
+        pageTitle.sendKeys('Blank pad rule');
+        loadPage.click();
+        browser.sleep(1500);
+
+        // find the navigation column
+        var navClass = element(by.id('navpanel')).getAttribute('class');
+        //expect(navClass).not.toMatch(' affix');
+        expect(navClass).toMatch('affix-top');
+
+        // scroll down to bottom of the page.
+        browser.executeScript('window.scrollTo(0, 1000000)').then(function() {
+
+            // need refresh the nav class.
+            navClass = element(by.id('navpanel')).getAttribute('class');
+            expect(navClass).toMatch('affix');
+            expect(navClass).not.toMatch('affix-top');
+        });
+    });
 });
