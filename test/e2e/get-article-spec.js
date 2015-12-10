@@ -70,5 +70,14 @@ describe('Basic specs for getArticle', function() {
             expect(navClass).toMatch('affix');
             expect(navClass).not.toMatch('affix-top');
         });
+
+        // scroll back to top of the page.
+        browser.executeScript('window.scrollTo(0, 0)').then(function() {
+
+            // need refresh the nav class.
+            navClass = element(by.id('navpanel')).getAttribute('class');
+            //expect(navClass).toMatch('affix');
+            expect(navClass).toMatch('affix-top');
+        });
     });
 });
