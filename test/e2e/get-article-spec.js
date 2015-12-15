@@ -51,33 +51,51 @@ describe('Basic specs for getArticle', function() {
             toEqual("From today's featured article");
     });
 
-    it('should has class affix when scroll to bottom', function() {
+    it('should have class affix when scroll to bottom', function() {
 
         pageTitle.sendKeys('Blank pad rule');
         loadPage.click();
         browser.sleep(1500);
 
         // find the navigation column
-        var navClass = element(by.id('navpanel')).getAttribute('class');
+        var navClass = element(by.id('navpanel')).
+                       getAttribute('class');
         //expect(navClass).not.toMatch(' affix');
         expect(navClass).toMatch('affix-top');
 
         // scroll down to bottom of the page.
-        browser.executeScript('window.scrollTo(0, 1000000)').then(function() {
+        browser.executeScript('window.scrollTo(0, 1000000)').
+            then(function() {
 
-            // need refresh the nav class.
-            navClass = element(by.id('navpanel')).getAttribute('class');
+            // need refresh the nav class by locate it again.
+            navClass = element(by.id('navpanel')).
+                       getAttribute('class');
             expect(navClass).toMatch('affix');
             expect(navClass).not.toMatch('affix-top');
         });
 
         // scroll back to top of the page.
-        browser.executeScript('window.scrollTo(0, 0)').then(function() {
+        browser.executeScript('window.scrollTo(0, 0)').
+            then(function() {
 
             // need refresh the nav class.
-            navClass = element(by.id('navpanel')).getAttribute('class');
+            navClass = element(by.id('navpanel')).
+                       getAttribute('class');
             //expect(navClass).toMatch('affix');
             expect(navClass).toMatch('affix-top');
         });
+    });
+
+    it('should have article title as the nav panel heading', 
+        function() {
+
+        pageTitle.sendKeys('China');
+        loadPage.click();
+        // sleep in miniseconds
+        browser.sleep(2000);
+
+        // find the heading by class name.
+        var heading = element(by.className('panel-heading'));
+        expect(heading.getText()).toBe('China');
     });
 });

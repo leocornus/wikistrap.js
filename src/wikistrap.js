@@ -114,7 +114,7 @@
                 // get the page content html from response.
                 var content = data.parse.text['*'];
                 // process the content to match bootstrap.
-                content = self.createArticleRow(content);
+                content = self.createArticleRow(title, content);
                 callback(null, content);
             });
         },
@@ -122,11 +122,11 @@
         /**
          * create bootstrap row for wiki article content.
          */
-        createArticleRow: function(content) {
+        createArticleRow: function(title, content) {
 
             var self = this;
 
-            var processed = this.processArticleContent(content);
+            var processed = this.processArticleContent(title, content);
             var contentHtml = processed['content'];
             var tocHtml = processed['toc'];
             var rowHtml = '<div class="row">' +
@@ -151,7 +151,7 @@
         /**
          * utility method to process the wiki article HTML
          */
-        processArticleContent: function(content) {
+        processArticleContent: function(title, content) {
 
             // parse the content html to a jQuery object.
             var $content = jQuery('<div>').html(content);
@@ -165,7 +165,7 @@
                 '                id="navpanel"' + 
                 '                style="margin-left: -15px">' + 
                 '  <div class="panel-heading">' +
-                '    <strong>Contents</strong>' + 
+                '    <strong>' + title + '</strong>' + 
                 '  </div>' +
                 '  <div id="sidenav">' + 
                 '    <ul class="nav nav-pills nav-stacked"' +
