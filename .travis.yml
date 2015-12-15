@@ -13,5 +13,4 @@ before_script:
 
 script: 
   - npm install
-  - bower install
-  - npm run gulp
+  - npm test

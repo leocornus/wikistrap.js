@@ -8,6 +8,22 @@ wikistrap.js
 Comprehensive JavaScript client to explore MediaWiki APIs, 
 using jQuery, Bootstrap, Font-Awesome.
 
+Quick Start
+-----------
+
+:install:
+  $ npm install
+:all tests:
+  $ npm test
+:unit test:
+  $ npm run unit-test
+:e2e test:
+  $ npm run e2e-test
+:demo app:
+  $ npm run express-app
+
+  visit http://localhost:8900/demo
+
 Releases
 --------
 
@@ -22,22 +38,6 @@ We use `Semantic Versioning`_ guidelines as much as possible.
 - 0.0.2 started the empty JavaScript class and set Karma runner
   for unit testing.
 - 0.0.1 initial commit to build the npm package.
-
-Quick Start
------------
-
-:install:
-  $ npm install
-
-  $ bower install
-:unit test:
-  $ npm run gulp unit-test
-:e2e test:
-  $ npm run gulp e2e-test
-:demo app:
-  $ npm run gulp express-app
-
-  visit http://localhost:8900/demo
 
 Documentation
 -------------

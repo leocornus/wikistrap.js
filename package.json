@@ -8,7 +8,11 @@
     "test": "test"
   },
   "scripts": {
-    "test": "npm gulp",
+    "postinstall": "bower install",
+    "test": "gulp",
+    "unit-test": "gulp unit-test",
+    "e2e-test": "gulp e2e-test",
+    "express-app": "gulp express-app",
     "gulp": "gulp"
   },
   "repository": {
