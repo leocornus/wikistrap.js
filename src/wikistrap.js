@@ -83,6 +83,12 @@
             return url;
         },
 
+        // return the max return limit.
+        getLimit: function() {
+
+            return this.siteOptions.limit;
+        },
+
         /**
          * get a wiki article.
          *
@@ -233,6 +239,342 @@
                 }
             });
         },
+
+        // toggle cursor
+        toggleCursor: function(cursorStyle)  {
+            jQuery('a').css('cursor', cursorStyle);
+            jQuery('html,body').css('cursor', cursorStyle);
+        },
+
+        /**
+         * return a list of page ids. or titles.
+         */
+        getPagesInCategory: function(category, callback) {
+
+            var self = this;
+            if(!category.match("^Category")) {
+                // not start from Category
+                category = 'Category: ' + category;
+            }
+            var action = {
+                'format' : 'json',
+                'action' : 'query',
+                'list' : 'categorymembers',
+                //'generator' : 'categorymembers',
+                // return all types of member.
+                'cmprop' : 'ids|title|type',
+                'cmtitle' : category,
+                'cmlimit' : this.getLimit()
+            };
+
+            this.apiGet(action, function(err, data) {
+                // need get a list of page ids.
+                if(err) {
+                    callback(err);
+                    return;
+                }
+
+                // pages array
+                var pages = data.query.categorymembers;
+                var $row = self.createCategoryRow(category, pages);
+                callback(null, $row);
+            });
+        },
+
+        /**
+         * build the 2-col row for a category.
+         */
+        createCategoryRow: function(category, pages) {
+
+            var self = this;
+            var headingHtml = self.buildHeading(category);
+            var searchBarHtml = self.buildSearchBar();
+            var infoBarHtml = self.buildInfoBar(pages.length);
+            // build the row html
+            var rowHtml = '<div class="row">' +
+                   '  <div class="col-md-4" id="navcol">' +
+                   '    <div class="panel panel-info ' + 
+                   '                sidebar-nav-fixed affix-top"' +
+                   '         id="navpanel"' + 
+                   '         style="margin-left: -15px">' + 
+                   headingHtml +
+                   searchBarHtml + 
+                   '      <div id="sidenav"></div>' + 
+                   infoBarHtml + 
+                   '    </div>' + 
+                   '  </div>' + 
+                   '  <div class="col-md-8" id="content"></div>' +
+                   '</div>';
+            var $row = jQuery(rowHtml);
+            // add the search event. keyboard down event.
+            $row.find('input[id=searchInCategory]').
+                 on('keyup', function(event) {
+
+                // get the search term.
+                var searchTerm = this.value;
+                // toggle remove button for the input group
+                self.toggleSearchRemoveButton(searchTerm, 
+                                              jQuery(this).parent());
+                self.filterNavPills(searchTerm);
+            });
+
+
+            // build the nav pills
+            // adding the category content page to pages list
+            pages.unshift({
+                'ns' : 0,
+                'pageid' : 0,
+                'title' : category,
+                'type' : 'category'
+            });
+            var $navPills = this.createNavPills(pages);
+            $row.find('#sidenav').append($navPills);
+
+            // hook the resize event.
+            jQuery(window).on('resize', function() {
+
+                self.syncSidenavWidth();
+            });
+
+            // load the category page as the default content.
+            this.getArticle(category, function(err, $content) {
+                // append to row.
+                $row.find('#content').
+                    append($content.find('#content').html());
+            });
+
+            return $row;
+        },
+
+        /**
+         * get ready a nav nav-pills for the given pages array.
+         * each page is an object with the following data structure:
+         *
+         * {
+         *    'ns' : 0,
+         *    'pageid' : 23458,
+         *    'title' : 'Backups Sys Admin',
+         *    'type' : 'page',
+         * }
+         */
+        createNavPills: function(pages) {
+
+            var self = this;
+            var navPills = '<ul class="nav nav-pills nav-stacked"' +
+                           '    style="max-height: 360px; ' + 
+                           '           overflow-y: auto"' +
+                           '></ul>';
+            var $navPills = jQuery(navPills);
+            //$navPills.attr('data-spy', 'affix');
+            jQuery.each(pages, function(index, page) {
+
+                var activeClass = 'class=""';
+                if (index == 0) {
+                    activeClass = 'class="active"';
+                }
+
+                var li = '<li ' + activeClass + '>' + 
+                         '<a data-toggle="pill" href="#">' +
+                         '<i class="fa fa-file-text-o"></i>' + ' ' +
+                         '<span>' + page['title'] + 
+                         '</span></a></li>';
+                $navPills.append(li);
+            });
+
+            // add the click event.
+            $navPills.find('li a').on('click', function() {
+
+                // set the cursor to wait.
+                self.toggleCursor('wait');
+                var pageTitle = jQuery(this).find('span').text();
+                self.getArticle(pageTitle, function(err, $content) {
+                    jQuery('html, body').animate({
+                       scrollTop: 0 
+                    }, 300, function() {
+                        jQuery('#content').html($content.find('#content').html());
+                        self.toggleCursor('default');
+                    });
+                });
+            });
+
+            return $navPills;
+        },
+
+        /**
+         * utility function to build the panel heading div.
+         */
+        buildHeading: function(category) {
+
+            var divHtml = 
+              '      <div class="panel-heading">' +
+              '        <strong><a href="#">' + category + 
+              //'          <i class="fa fa-refresh pull-right"></i>' + 
+              '        </a></strong>' +
+              '      </div>';
+
+            return divHtml;
+        },
+        
+        /**
+         * utility function to build search bar for category panel.
+         * the search bar will be hold in a panel-footer div.
+         */
+        buildSearchBar: function() {
+
+            var divHtml = 
+              '<div class="panel-footer">' + 
+              '  <div class="input-group input-group-sm"' +
+              '       role="group" aria-label="...">' + 
+              '    <span class="input-group-addon bg-info"' +
+              '          id="sizing-addon">' + 
+              '      <i class="fa fa-search text-primary"></i>' +
+              '    </span>' + 
+              '    <input type="text" class="form-control"' + 
+              '           placeholder="Find an article in category"' + 
+              '           id="searchInCategory"' +
+              '           aria-describedby="sizing-addon"/>' +
+              '  </div>' + 
+              '</div>';
+
+            // TODO: Add the search function here.
+            return divHtml;
+        },
+
+        /**
+         * utility function to build the remove button for search
+         * bar input as a input add on.
+         */
+        buildSearchBarRemove: function() {
+
+            var removeHtml =
+              '<span class="input-group-addon bg-info"' +
+              '      id="search-remove">' + 
+              '  <a href="#" id="cleanSearchTerm">' +
+              '  <i class="fa fa-remove text-primary"></i>' +
+              '  </a>' +
+              '</span>';
+
+            return removeHtml;
+        },
+
+        /**
+         * filter the items on nav pills for the given search term.
+         * this will highlight the matched term
+         */
+        filterNavPills: function(searchTerm) {
+
+            var $navPills = jQuery('#sidenav');
+
+            // clear all marks.
+            $navPills.find('mark').replaceWith(function() {
+                return jQuery(this).text();
+            });
+
+            if(searchTerm.length > 0) {
+                // hide all items.
+                jQuery.each($navPills.find('li'), 
+                            function(index, item) {
+                    var $item = jQuery(item);
+                    if(! $item.hasClass('active')) {
+                        // we will leave the active one as it is.
+                        $item.attr('style', 'display: none');
+                    }
+                });
+
+                // search the term.
+                var selector = 'li:contains("' + searchTerm + 
+                               '")';
+                // display all matched items.
+                jQuery.each($navPills.find(selector),
+                            function(index, item) {
+                    // the item will be a DOM element.
+                    var $item = jQuery(item);
+                    $item.attr('style', '');
+                    // highlight mached terms.
+                    var $title = $item.find('a span');
+                    var newTitle = $title.text().
+                        replace(searchTerm, 
+                                '<mark>' + searchTerm + '</mark>');
+                    $title.html(newTitle);
+                });
+            } else {
+                // search term less than 1, 
+                // we will show all articles.
+                jQuery.each($navPills.find('li'), 
+                            function(index, item) {
+                    // remove styles by set to empty.
+                    jQuery(item).attr('style', '');
+                });
+            }
+        },
+
+        /**
+         * toggle remove icon for search input
+         */
+        toggleSearchRemoveButton: function(searchTerm, $inputGroup) {
+
+            var self = this;
+
+            var removeBtn = $inputGroup.find('span#search-remove');
+            if(removeBtn.length > 0) {
+                // remove button presents.
+                if(searchTerm.length > 0) {
+                    // do nothing.
+                } else {
+                    // remove the remove button.
+                    removeBtn.remove();
+                }
+            } else {
+                // no remove button.
+                if(searchTerm.length > 0) {
+                    // add the remove button.
+                    removeBtn = this.buildSearchBarRemove();
+                    $inputGroup.append(removeBtn);
+                    // listen to the click event for remove button 
+                    // of the search input field.
+                    $inputGroup.find('a#cleanSearchTerm').
+                         on('click', function(event) {
+
+                        // find the search input field
+                        $search = 
+                          $inputGroup.find('input#searchInCategory');
+                        // set value to nothing.
+                        $search.val('');
+                        // trigger keyup event.
+                        $search.trigger('keyup');
+                    });
+
+                } else {
+                    // do nothing...
+                }
+            }
+        },
+
+        /**
+         * utility function to build info bar for category panel.
+         * the info bar will be hold in a panel-footer div.
+         */
+        buildInfoBar: function(total) {
+
+            var divHtml = 
+              '<div class="panel-footer">' + 
+              '  <div class="text-right">' +
+              '    <span class="label label-success">' +
+              '      <span id="infoSummary">Found ' + total + 
+              '      Articles</span>' +
+              '    </span>' + 
+              '    <a href="#"><span class="label label-warning">' +
+              '      <i class="fa fa-chevron-left"></i>' +
+              '    </span></a>' + 
+              '    <a href="#"><span class="label label-warning">' +
+              '      <i class="fa fa-chevron-right"></i>' +
+              '    </span></a>' + 
+              '  </div>' + 
+              '</div>';
+
+            // TODO: Add the pagination function here.
+            return divHtml;
+        }
     });
 
     // export to window
