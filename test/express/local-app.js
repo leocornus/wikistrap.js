@@ -24,6 +24,10 @@ app.get('/hello', function(req, res) {
 var wikiApi = require('./wiki-api.js');
 app.get('/wiki/api.php', wikiApi);
 
+// direct mediawiki api call to commons.wikimedia.org
+var commonsApi = require('./commons-api.js');
+app.get('/commons/api.php', commonsApi);
+
 // start the express server.
 var server = app.listen(8900, function() {
 });
