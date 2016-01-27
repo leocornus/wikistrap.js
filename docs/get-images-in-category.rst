@@ -25,5 +25,30 @@ Here are the simple steps:
 - wikistrap.js will load all images in the catetory and 
   present them as a manual.
 
+API calls for images manual
+---------------------------
 
+list categorymembers with type file::
 
+  action = {
+      'format' : 'json',
+      'action' : 'query',
+      'list' : 'categorymembers',
+      // return only file type.
+      'cmtype' : 'file',
+      'cmprop' : 'ids|title|type',
+      'cmtitle' : 'CATEGORY TITLE',
+      'cmlimit' : 10
+  }
+
+query imageinfo with url and mime type::
+
+  action = {
+      'format' : 'json',
+      'action' : 'query',
+      'titles' : 'File:one.jpg|File:two.png',
+      'prop' : 'imageinfo',
+      'iiprop' : 'url|mime'
+  }
+
+get article for the file
