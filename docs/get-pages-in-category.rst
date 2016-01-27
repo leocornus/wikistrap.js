@@ -9,5 +9,5 @@ which will:
   each page title is clickable
 - show the content for any page (on left nav bar) is selected.
 
-The `demo page <../demo/get-pages-in-category.html`_ shows the 
+The `demo page <../demo/get-pages-in-category.html>`_ shows the 
 simplest use case for this funtion.
