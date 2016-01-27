@@ -19,12 +19,12 @@ Quick steps::
 
 Using demo applications::
 
-  $ npm run gulp express-app
+  $ npm run express-app
 
 Execute unit testing only::
 
-  $ npm run gulp unit-test
+  $ npm run unit-test
 
 Execute end to end testing only::
 
-  $ npm run gulp e2e-test
+  $ npm run e2e-test
