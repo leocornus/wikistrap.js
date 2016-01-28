@@ -665,11 +665,15 @@
                 var aRow = '<div class="row">' +
                     '  <div class="col-md-6">' +
                     '    <div class="thumbnail">' +
-                    '    <img style="height: 300px" src="' + 
-                    page['imageinfo'][0]['url'] + '">' +
+                    '    <img style="height: 500px"' + 
+                    '         src="' + page['imageinfo'][0]['url'] + '"' +
+                    '         id="pageid-' + page['pageid'] + '"' +
+                    '         pageTitle="' + page['title'] + '"' +
+                    '    >' +
                     '    </div>' +
                     '  </div>' +
-                    '  <div class="col-md-6" id="imageDesc">' +
+                    '  <div class="col-md-6" id="image-desc-' + 
+                                                 page['pageid'] + '">' +
                     '  </div>' +
                     '</div>';
                 rows.push(aRow);
@@ -677,6 +681,22 @@
 
             //console.log(rows);
             var $row = jQuery(rows.join(' '));
+
+            // hook the load event.
+            $row.find('img[id^=pageid-]').on('load', function(event) {
+                // page id.
+                var pageId = this.id
+                //console.log(this.id);
+                var pageTitle = jQuery(this).attr('pageTitle');
+                //console.log(pageTitle);
+                var descId = pageId.replace('pageid', 'image-desc');
+                //console.log(descId);
+                self.getArticle(pageTitle, function(err, $content) {
+                    $row.find('#' + descId).
+                        html($content.find('#content').html());
+                });
+            });
+
             //console.log($row);
             return $row;
         }
