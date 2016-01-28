@@ -126,6 +126,83 @@
         },
 
         /**
+         * return the the imageinfo for the give titles.
+         */
+        getImageinfo: function(titles, callback) {
+
+            // get ready the data send to wiki api.php.
+            var action = {
+                'format' : 'json',
+                'action' : 'query',
+                'titles' : titles,
+                'prop' : 'imageinfo',
+                'iiprop' : 'url|mime'
+            };
+
+            // call wiki api
+            this.apiGet(action, function(err, data) {
+
+                if(err) {
+                    // got error.
+                    callback(err);
+                    return;
+                }
+
+                // get the pages.
+                var pages = data.query.pages;
+                // TODO: structure of the pages object.
+                callback(null, pages);
+            });
+        },
+
+        /**
+         * return a list of images from the give category..
+         */
+        getImagesInCategory: function(category, callback) {
+
+            var self = this;
+            if(!category.match("^Category")) {
+                // not start from Category
+                category = 'Category: ' + category;
+            }
+            var action = {
+                'format' : 'json',
+                'action' : 'query',
+                'list' : 'categorymembers',
+                //'generator' : 'categorymembers',
+                'cmtype' : 'file',
+                'cmprop' : 'title',
+                'cmtitle' : category,
+                'cmlimit' : this.getLimit()
+            };
+
+            this.apiGet(action, function(err, data) {
+                // need get a list of page ids.
+                if(err) {
+                    callback(err);
+                    return;
+                }
+
+                // images array
+                var members = data.query.categorymembers;
+                var titles = [];
+                // preparing the image titles.
+                jQuery.each(members, function(index, member) {
+                    titles.push(member['title']);
+                });
+
+                // get imageinfo and build the images rows.
+                var $row;
+                self.getImageinfo(titles.join('|'), 
+                                  function(error, images) {
+                    // create row for each image.
+                    $row = self.createImagesRow(images);
+                    callback(null, $row);
+                });
+            });
+        },
+
+        /**
          * create bootstrap row for wiki article content.
          */
         createArticleRow: function(title, content) {
@@ -574,6 +651,34 @@
 
             // TODO: Add the pagination function here.
             return divHtml;
+        },
+
+        /**
+         */
+        createImagesRow: function(images) {
+
+            var self = this;
+
+            var rows = [];
+            jQuery.each(images, function(pageId, page) {
+
+                var aRow = '<div class="row">' +
+                    '  <div class="col-md-6">' +
+                    '    <div class="thumbnail">' +
+                    '    <img style="height: 300px" src="' + 
+                    page['imageinfo'][0]['url'] + '">' +
+                    '    </div>' +
+                    '  </div>' +
+                    '  <div class="col-md-6" id="imageDesc">' +
+                    '  </div>' +
+                    '</div>';
+                rows.push(aRow);
+            });
+
+            //console.log(rows);
+            var $row = jQuery(rows.join(' '));
+            //console.log($row);
+            return $row;
         }
     });
 

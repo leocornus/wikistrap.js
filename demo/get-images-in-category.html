@@ -31,10 +31,10 @@ jQuery(document).ready(function() {
     jQuery("#load-cat").click(function(event) {
 
         var title = jQuery("#cat-title").val();
-        client.getPagesInCategory(title, function(err, content) {
-            //client.log(content);
+        client.getImagesInCategory(title, function(err, content) {
+            //console.log(content);
             $('#content-container').html(content);
-            client.syncSidenavWidth();
+            //client.syncSidenavWidth();
         });
     });
 });
