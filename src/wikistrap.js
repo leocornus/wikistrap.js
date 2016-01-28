@@ -660,28 +660,41 @@
             var self = this;
 
             var rows = [];
+            var index = 0;
             jQuery.each(images, function(pageId, page) {
 
                 // get the image url.
                 var imageUrl = page['imageinfo'][0]['url'];
-                var aRow = '<div class="row">' +
-                    '  <div class="col-md-6">' +
-                    '    <div class="thumbnail">' +
-                    '    <img style="height: 500px"' + 
-                    '         src="' + imageUrl + '"' +
-                    '         id="pageid-' + page['pageid'] + '"' +
-                    '         pageTitle="' + page['title'] + '"' +
-                    '    >' +
-                    '    </div>' +
-                    '  </div>' +
-                    '  <div class="col-md-6"' +
-                    '       id="image-desc-' + page['pageid'] + '"' +
-                    '       style="max-height: 500px; ' +
-                    '              overflow-y: auto"' +
+                // the image column.
+                var imageCol =
+                    '<div class="col-md-6">' +
+                    '  <div class="thumbnail">' +
+                    '  <img style="height: 500px"' +
+                    '       src="' + imageUrl + '"' +
+                    '       id="pageid-' + page['pageid'] + '"' +
+                    '       pageTitle="' + page['title'] + '"' +
                     '  >' +
                     '  </div>' +
                     '</div>';
+                // the image description column
+                var descCol =
+                    '<div class="col-md-6"' +
+                    '     id="image-desc-' + page['pageid'] + '"' +
+                    '     style="max-height: 500px; ' +
+                    '            overflow-y: auto"' +
+                    '>' +
+                    '</div>';
+
+                // starts from the order: image and desc
+                var cols = imageCol + descCol;
+                if (index % 2 == 1) {
+                    // switch to: desc and image.
+                    cols = descCol + imageCol;
+                }
+
+                var aRow = '<div class="row">' + cols + '</div>';
                 rows.push(aRow);
+                index = index + 1;
             });
 
             //console.log(rows);
