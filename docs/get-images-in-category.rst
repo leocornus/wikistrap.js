@@ -56,7 +56,10 @@ query imageinfo with url and mime type::
       'action' : 'query',
       'titles' : 'File:one.jpg|File:two.png',
       'prop' : 'imageinfo',
-      'iiprop' : 'url|mime'
+      'iiprop' : 'url|mime',
+      // the iiurlwith or iiurlwidth will return
+      // a scaled thumbnail url, in pixel
+      'iiurlheight' : 300
   }
 
 Here is the return format for the imageinfo::
@@ -70,6 +73,9 @@ Here is the return format for the imageinfo::
               "imagerepository": "local",
               "imageinfo": [
                   {
+                      "thumburl": "https://uplead.jpg",
+                      "thumbwidth": 225,
+                      "thumbheight": 300,
                       "url": "https://uploadnstein_Head.jpg",
                       "descriptionurl": "https://co.jpg",
                       "mime": "image/jpeg"
@@ -83,6 +89,9 @@ Here is the return format for the imageinfo::
               "imagerepository": "local",
               "imageinfo": [
                   {
+                      "thumburl": "https://uplead.jpg",
+                      "thumbwidth": 225,
+                      "thumbheight": 300,
                       "url": "https://upload.wikimem.jpg",
                       "descriptionurl": "https://coenblum.jpg",
                       "mime": "image/jpeg"
