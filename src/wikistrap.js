@@ -672,8 +672,10 @@
                     '    >' +
                     '    </div>' +
                     '  </div>' +
-                    '  <div class="col-md-6" id="image-desc-' + 
-                                                 page['pageid'] + '">' +
+                    '  <div class="col-md-6"' +
+                    '       id="image-desc-' + page['pageid'] + '"' +
+                    '       style="max-height: 500px; overflow-y: auto"' +
+                    '  >' +
                     '  </div>' +
                     '</div>';
                 rows.push(aRow);
