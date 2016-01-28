@@ -25,10 +25,16 @@ Here are the simple steps:
 - wikistrap.js will load all images in the catetory and 
   present them as a manual.
 
+Workflow thinking...
+--------------------
+
+- batch get all title for files in a category
+- query all imageinfo at one api call
+
 API calls for images manual
 ---------------------------
 
-list categorymembers with type file::
+Return all images by query list categorymembers with type file::
 
   action = {
       'format' : 'json',
@@ -41,6 +47,8 @@ list categorymembers with type file::
       'cmlimit' : 10
   }
 
+default sort order?
+
 query imageinfo with url and mime type::
 
   action = {
@@ -51,4 +59,42 @@ query imageinfo with url and mime type::
       'iiprop' : 'url|mime'
   }
 
-get article for the file
+Here is the return format for the imageinfo::
+
+  "query": {
+      "pages": {
+          "925243": {
+              "pageid": 925243,
+              "ns": 6,
+              "title": "File:Albert Einstein Head.jpg",
+              "imagerepository": "local",
+              "imageinfo": [
+                  {
+                      "url": "https://uploadnstein_Head.jpg",
+                      "descriptionurl": "https://co.jpg",
+                      "mime": "image/jpeg"
+                  }
+              ]
+          },
+          "3643108": {
+              "pageid": 3643108,
+              "ns": 6,
+              "title": "File:Mendel rosenblum.jpg",
+              "imagerepository": "local",
+              "imageinfo": [
+                  {
+                      "url": "https://upload.wikimem.jpg",
+                      "descriptionurl": "https://coenblum.jpg",
+                      "mime": "image/jpeg"
+                  }
+              ]
+          }
+      }
+  }
+
+get article for the file::
+
+  wikistrap.getArticle(pageTitle, function(err, $content) {
+      // content html could be access
+      $content.find('#content').html();
+  });
