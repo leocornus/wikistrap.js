@@ -11,6 +11,9 @@ describe('Basic specs for getArticle', function() {
 
         loadPage = element(by.id('load-page'));
         pageTitle = element(by.id('page-title'));
+
+        // we need the content container to verify some results.
+        content = element(by.id('content-container'));
     });
 
     it('should load the get article demo page', function() {
@@ -40,7 +43,10 @@ describe('Basic specs for getArticle', function() {
 
         // need sleep a couple seconds to make sure the 
         // response are back.
-        browser.sleep(1000);
+        //browser.sleep(1000);
+        browser.wait(function() {
+            return content.isElementPresent(by.css('.panel-heading'));
+        });
 
         // find some content on the wikipedia main page to verify the 
 
@@ -55,7 +61,10 @@ describe('Basic specs for getArticle', function() {
 
         pageTitle.sendKeys('Blank pad rule');
         loadPage.click();
-        browser.sleep(1500);
+        //browser.sleep(1500);
+        browser.wait(function() {
+            return content.isElementPresent(by.css('.panel-heading'));
+        });
 
         // find the navigation column
         var navClass = element(by.id('navpanel')).
@@ -91,8 +100,14 @@ describe('Basic specs for getArticle', function() {
 
         pageTitle.sendKeys('China');
         loadPage.click();
+
         // sleep in miniseconds
-        browser.sleep(2000);
+        //browser.sleep(2000);
+        // wait until the element with panel-heading class 
+        // present, no timeout.
+        browser.wait(function() {
+            return content.isElementPresent(by.css('.panel-heading'));
+        });
 
         // find the heading by class name.
         var heading = element(by.className('panel-heading'));

@@ -50,6 +50,7 @@ describe('Basic specs for get images in category', function() {
             return content.isElementPresent(by.css('.row'));
         }
         // we could set wait timeout here in ms.
+        // if not set, the default timeout will be used.
         //, 3000
         // and set timeout message here:
         //, 'it should present in 3 seconds'
