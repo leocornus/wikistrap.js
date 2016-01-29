@@ -136,7 +136,8 @@
                 'action' : 'query',
                 'titles' : titles,
                 'prop' : 'imageinfo',
-                'iiprop' : 'url|mime'
+                'iiprop' : 'url|mime',
+                'iiurlheight' : 500
             };
 
             // call wiki api
@@ -664,7 +665,7 @@
             jQuery.each(images, function(pageId, page) {
 
                 // get the image url.
-                var imageUrl = page['imageinfo'][0]['url'];
+                var imageUrl = page['imageinfo'][0]['thumburl'];
                 // the image column.
                 var imageCol =
                     '<div class="col-md-6">' +
