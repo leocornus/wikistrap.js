@@ -3,7 +3,7 @@ var bot = require('nodemw');
 var client = new bot({
     server: 'commons.wikimedia.org',
     path: '/w',
-    debug: true
+    debug: false 
 });
 
 var api = function(req, res) {

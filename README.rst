@@ -29,6 +29,7 @@ Releases
 
 We use `Semantic Versioning`_ guidelines as much as possible.
 
+- 0.0.6 funtions to pull pages and images from any category.
 - 0.0.5 getArticle will get any wiki article and present the 
   content in bootstrap row with left and right column.
 - 0.0.4 Set up to use express.js as the local testing server
