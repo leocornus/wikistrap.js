@@ -90,6 +90,14 @@
         },
 
         /**
+         * set the max return limit.
+         */
+        setLimit: function(limit) {
+
+            this.siteOptions.limit = limit;
+        },
+
+        /**
          * get a wiki article.
          *
          * @param {string} title the page title, which should 

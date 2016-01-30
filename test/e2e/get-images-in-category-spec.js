@@ -11,6 +11,8 @@ describe('Basic specs for get images in category', function() {
 
         loadCategory = element(by.id('load-cat'));
         category = element(by.id('cat-title'));
+        limit = element(by.id('limit'));
+
         // we need the content container to verify some results.
         content = element(by.id('content-container'));
     });
@@ -41,6 +43,7 @@ describe('Basic specs for get images in category', function() {
 
         // send the key.
         category.sendKeys('Space_Shuttle_Atlantis');
+        limit.sendKeys('5');
         loadCategory.click();
 
         // sleep for response comming.
@@ -64,6 +67,6 @@ describe('Basic specs for get images in category', function() {
 
         // check all rows.
         var rows = element.all(by.css('.row'));
-        expect(rows.count()).toBe(3);
+        expect(rows.count()).toBe(5);
     });
 });
