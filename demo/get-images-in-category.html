@@ -32,7 +32,9 @@ jQuery(document).ready(function() {
 
         var title = jQuery("#cat-title").val();
         var limit = jQuery('#limit').val();
-        client.setLimit(limit);
+        if(limit != "") {
+            client.setLimit(limit);
+        }
         client.getImagesInCategory(title, function(err, content) {
             //console.log(content);
             $('#content-container').html(content);
@@ -46,8 +48,8 @@ jQuery(document).ready(function() {
 <div class="container container-fluid">
 <div class="jumbotron">
   <h1 id='demo-title'>Get Images in Category</h1>
-  <p>Wiki Category: <input type="text" id="cat-title"></input>
-    Image Limit: <input type="text" id="limit"></input>
+  <p>Wiki Category: <input type="text" id="cat-title" value="Space Shuttle Atlantis"></input>
+    Image Limit: <input type="text" id="limit" value="3"></input>
   </p>
   <p><a class="btn btn-primary btn-lg" id="load-cat" href="#" 
         role="button">
