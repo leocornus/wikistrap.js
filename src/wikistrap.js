@@ -663,6 +663,9 @@
         },
 
         /**
+         * create a 2-col row for each image.
+         * one column for the thumb nail image and
+         * another column for the description of the image.
          */
         createImagesRow: function(images) {
 
@@ -676,7 +679,7 @@
                 var imageUrl = page['imageinfo'][0]['thumburl'];
                 // the image column.
                 var imageCol =
-                    '<div class="col-md-6">' +
+                    '<div class="col-md-8">' +
                     '  <div class="thumbnail">' +
                     '  <img style="height: 500px"' +
                     '       src="' + imageUrl + '"' +
@@ -687,7 +690,7 @@
                     '</div>';
                 // the image description column
                 var descCol =
-                    '<div class="col-md-6"' +
+                    '<div class="col-md-4"' +
                     '     id="image-desc-' + page['pageid'] + '"' +
                     '     style="max-height: 500px; ' +
                     '            overflow-y: auto"' +
