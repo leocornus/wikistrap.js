@@ -166,8 +166,9 @@
 
         /**
          * return a list of images from the give category..
+         * 
          */
-        getImagesInCategory: function(category, callback) {
+        getImagesInCategory: function(category, viewType, callback) {
 
             var self = this;
             if(!category.match("^Category")) {
@@ -206,8 +207,20 @@
                 self.getImageinfo(titles.join('|'), 
                                   function(error, images) {
                     // create row for each image.
-                    //$row = self.createImagesRow(images);
-                    $row = self.createImagesLightbox(ids, images);
+                    // the imageinfo api will not reserve the 
+                    // sorting order, 
+                    // so we pass ids from categorymembers to keep
+                    // the sorting order.
+                    switch(viewType) {
+                    case 'lightbox':
+                        $row = self.createImagesLightbox(ids, 
+                                                         images);
+                        break;
+                    case 'list':
+                    default:
+                        $row = self.createImagesRow(ids, images);
+                        break;
+                    }
                     callback(null, $row);
                 });
             });
@@ -669,14 +682,15 @@
          * one column for the thumb nail image and
          * another column for the description of the image.
          */
-        createImagesRow: function(images) {
+        createImagesRow: function(ids, images) {
 
             var self = this;
 
             var rows = [];
             var index = 0;
-            jQuery.each(images, function(pageId, page) {
+            jQuery.each(ids, function(index, pageId) {
 
+                var page = images[pageId];
                 // get the image url.
                 var imageUrl = page['imageinfo'][0]['thumburl'];
                 // the image column.
