@@ -180,7 +180,7 @@
                 'list' : 'categorymembers',
                 //'generator' : 'categorymembers',
                 'cmtype' : 'file',
-                'cmprop' : 'title',
+                'cmprop' : 'ids|title',
                 'cmtitle' : category,
                 'cmlimit' : this.getLimit()
             };
@@ -195,18 +195,19 @@
                 // images array
                 var members = data.query.categorymembers;
                 var titles = [];
+                var ids = [];
                 // preparing the image titles.
                 jQuery.each(members, function(index, member) {
+                    ids.push(member['pageid']);
                     titles.push(member['title']);
                 });
 
                 // get imageinfo and build the images rows.
-                var $row;
                 self.getImageinfo(titles.join('|'), 
                                   function(error, images) {
                     // create row for each image.
                     //$row = self.createImagesRow(images);
-                    $row = self.createImagesLightbox(images);
+                    $row = self.createImagesLightbox(ids, images);
                     callback(null, $row);
                 });
             });
@@ -735,13 +736,14 @@
         /**
          * create photo album for the images by using lightbox2.
          */
-        createImagesLightbox: function(images) {
+        createImagesLightbox: function(ids, images) {
 
             var self = this;
 
             var boxies = [];
-            jQuery.each(images, function(pageId, page) {
+            jQuery.each(ids, function(index, pageId) {
 
+                var page = images[pageId];
                 var thumbUrl = page['imageinfo'][0]['thumburl'];
                 var imageUrl = page['imageinfo'][0]['url'];
                 var imageTitle = page['title'];
