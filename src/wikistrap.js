@@ -205,7 +205,8 @@
                 self.getImageinfo(titles.join('|'), 
                                   function(error, images) {
                     // create row for each image.
-                    $row = self.createImagesRow(images);
+                    //$row = self.createImagesRow(images);
+                    $row = self.createImagesLightbox(images);
                     callback(null, $row);
                 });
             });
@@ -729,6 +730,39 @@
 
             //console.log($row);
             return $row;
+        },
+
+        /**
+         * create photo album for the images by using lightbox2.
+         */
+        createImagesLightbox: function(images) {
+
+            var self = this;
+
+            var boxies = [];
+            jQuery.each(images, function(pageId, page) {
+
+                var thumbUrl = page['imageinfo'][0]['thumburl'];
+                var imageUrl = page['imageinfo'][0]['url'];
+                var imageTitle = page['title'];
+                // one box for each image.
+                var box = 
+                  '<a class="example-image-link"' +
+                  '   href="' + imageUrl + '"' +
+                  '   data-lightbox="example-set"' +
+                  '   data-title="' + imageTitle + '"' + 
+                  '>' +
+                  '  <img class="example-image"' +
+                  '       src="' + thumbUrl + '"' +
+                  '       alt="' + imageTitle + '"/>' +
+                  '</a>';
+                boxies.push(box);
+            });
+
+            var $boxies = jQuery('<div class="image-row">' + 
+                                 boxies.join(' ') +
+                                 '</div>');
+            return $boxies;
         }
     });
 
