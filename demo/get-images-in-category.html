@@ -3,6 +3,7 @@
     <title>MediaWiki Demo</title>
 
     <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+  <link rel='stylesheet' href='/bower_components/lightbox2/dist/css/lightbox.min.css'/>
 
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
     <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
@@ -12,9 +13,12 @@
 
     <script src="/src/wikistrap.js"></script>
     <style>
-    .affix {
-        top: 50px;
-    }
+.affix {
+    top: 50px;
+}
+.image-row img {
+  width: 120px
+}
     </style>
     <script>
 // we need this to load protractor.
@@ -60,5 +64,8 @@ jQuery(document).ready(function() {
 <div id="content-container" class="container-fluid">
 </div>
 </div>
+
+  <script src='/bower_components/lightbox2/dist/js/lightbox.js'></script>
+
   </body>
 </html>
