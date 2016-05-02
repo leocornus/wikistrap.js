@@ -3,11 +3,14 @@
     <title>MediaWiki Demo</title>
 
     <script src='/bower_components/jquery/dist/jquery.min.js'></script>
-  <link rel='stylesheet' href='/bower_components/lightbox2/dist/css/lightbox.min.css'/>
+    <link rel='stylesheet' href='/bower_components/lightbox2/dist/css/lightbox.min.css'/>
 
     <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
     <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
     <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css'/>
+
+  <script src='/bower_components/arm-galleria/src/galleria.js'></script>
+  <script src='/bower_components/arm-galleria/src/themes/classic/galleria.classic.js'></script>
 
     <script src='/bower_components/angular/angular.min.js'></script>
 
@@ -18,6 +21,11 @@
 }
 .image-row img {
   width: 120px
+}
+.galleria {
+  width: 100%; 
+  height: 500px;
+  background: #000
 }
     </style>
     <script>
@@ -42,12 +50,15 @@ jQuery(document).ready(function() {
 
         // get present type:
         var present = jQuery(this).attr('wiki-present');
-        console.log(present);
+        //console.log(present);
         client.getImagesInCategory(title, present, 
                                    function(err, content) {
             //console.log(content);
             $('#content-container').html(content);
             //client.syncSidenavWidth();
+            if(present == 'galleria') {
+                Galleria.run('.galleria');
+            }
         });
     });
 });
@@ -70,6 +81,11 @@ jQuery(document).ready(function() {
        wiki-present="lightbox"
         role="button">
     Load Category Images Lightbox
+    </a>
+    <a class="btn btn-primary btn-lg" id="load-cat" href="#" 
+       wiki-present="galleria"
+        role="button">
+    Load Category Images Galleria 
     </a>
   </p>
 </div>

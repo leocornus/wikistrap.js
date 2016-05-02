@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "angular": "angularjs#~1.4.8",
-    "lightbox2": "~2.8.2"
+    "lightbox2": "~2.8.2",
+    "arm-galleria": "~1.4.3"
   }
 }
