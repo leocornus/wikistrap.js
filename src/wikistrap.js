@@ -213,7 +213,11 @@
                     // the sorting order.
                     switch(viewType) {
                     case 'lightbox':
-                        $row = self.createImagesLightbox(ids, 
+                        $row = self.createImagesLightbox(ids,
+                                                         images);
+                        break;
+                    case 'galleria':
+                        $row = self.createImagesGalleria(ids,
                                                          images);
                         break;
                     case 'list':
@@ -776,6 +780,33 @@
             });
 
             var $boxies = jQuery('<div class="image-row">' + 
+                                 boxies.join(' ') +
+                                 '</div>');
+            return $boxies;
+        },
+
+        /**
+         * create photo album for the images by using Galleria.
+         */
+        createImagesGalleria: function(ids, images) {
+
+            var self = this;
+
+            var boxies = [];
+            jQuery.each(ids, function(index, pageId) {
+
+                var page = images[pageId];
+                var imageUrl = page['imageinfo'][0]['url'];
+                var imageTitle = page['title'];
+                // one box for each image.
+                var box =
+                  '<img class="example-image"' +
+                  '     src="' + imageUrl + '"' +
+                  '     alt="' + imageTitle + '"/>';
+                boxies.push(box);
+            });
+
+            var $boxies = jQuery('<div class="galleria">' +
                                  boxies.join(' ') +
                                  '</div>');
             return $boxies;
