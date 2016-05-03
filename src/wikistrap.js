@@ -796,13 +796,16 @@
             jQuery.each(ids, function(index, pageId) {
 
                 var page = images[pageId];
+                var thumbUrl = page['imageinfo'][0]['thumburl'];
                 var imageUrl = page['imageinfo'][0]['url'];
                 var imageTitle = page['title'];
                 // one box for each image.
                 var box =
+                  '<a href="' + imageUrl + '">' +
                   '<img class="example-image"' +
-                  '     src="' + imageUrl + '"' +
-                  '     alt="' + imageTitle + '"/>';
+                  '     src="' + thumbUrl + '"' +
+                  '     alt="' + imageTitle + '"/>' +
+                  '</a>';
                 boxies.push(box);
             });
 
