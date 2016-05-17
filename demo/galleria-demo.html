@@ -1,0 +1,139 @@
+<html>
+<head>
+  <title>Demo Galleria Photo Album</title>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <link rel='stylesheet' href='/bower_components/lightbox2/dist/css/lightbox.min.css'/>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css'/>
+
+  <script src='/bower_components/arm-galleria/src/galleria.js'></script>
+  <script src='/bower_components/arm-galleria/src/themes/classic/galleria.classic.js'></script>
+
+    <script src='/bower_components/angular/angular.min.js'></script>
+
+    <script src="/src/wikistrap.js"></script>
+    <style>
+.affix {
+    top: 50px;
+}
+.image-row img {
+  width: 120px
+}
+.galleria {
+  width: 100%; 
+  height: 600px;
+  background: #000
+}
+    </style>
+<script>
+jQuery(document).ready(function($) {
+  $('#preview').on('click', function() {
+
+    // get the source, width, height
+    var source = $('#inputSource').val();
+    var width = $('#inputWidth').val();
+    console.log(width);
+    var height = $('#inputHeight').val();
+
+    // preparing the video tag.
+    var video = '<video ' +
+      '    id="my-video" class="video-js" ' +
+      '    controls preload="auto" width="' + width + '" ' +
+      '    height="' + height + '" ' +
+      '    poster="http://vjs.zencdn.net/v/oceans.png" ' +
+      '    data-setup="{}">' +
+      '  <source src="' + source + '" type="video/mp4">' +
+      '</video>';
+
+    // replace the "#the-video" div.
+    $('#the-video').html(video);
+
+    // we need destroy the existing video.js object.
+    var player = videojs('my-video').dispose();
+    // load video.js by id of the video tag.
+    videojs("my-video", {}, function() {
+    });
+  });
+});
+</script>
+</head>
+
+<body>
+<div class="container">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-md-7">
+        <h1 class="">Galleria Photo Album Demo Page</h1> 
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+  <div class="col-md-4">
+    <h2>Customization Form</h2>
+
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="inputSource" class="col-sm-2 control-label">Source</label>
+        <div class="col-sm-10">
+          <input type="url" class="form-control" id="inputSource" 
+                 placeholder="Media Source"
+                 value="http://vjs.zencdn.net/v/oceans.mp4">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputWidth" class="col-sm-2 control-label">
+          Width
+        </label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="inputWidth" 
+                 placeholder="Media Width" value="640">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputHeight" class="col-sm-2 control-label">
+          Height
+        </label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="inputHeight" 
+                 placeholder="Media Height" value="264">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="button" id="preview" class="btn btn-default">
+          Preview
+          </button>
+        </div>
+      </div>
+    </form> 
+  </div>
+
+  <div class="col-md-8">
+
+    <h2>Minimum Requirement for HTML 5 player</h2>
+
+    <div id="the-video">
+    <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+    poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
+      <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+    </div>
+  </div>
+
+  </div>
+</div>
+</body>
+
+</html>
