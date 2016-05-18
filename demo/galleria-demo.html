@@ -33,28 +33,23 @@ jQuery(document).ready(function($) {
   $('#preview').on('click', function() {
 
     // get the source, width, height
-    var source = $('#inputSource').val();
+    var category = $('#inputCategory').val();
+    var limit = $('#inputLimit').val();
     var width = $('#inputWidth').val();
-    console.log(width);
     var height = $('#inputHeight').val();
 
-    // preparing the video tag.
-    var video = '<video ' +
-      '    id="my-video" class="video-js" ' +
-      '    controls preload="auto" width="' + width + '" ' +
-      '    height="' + height + '" ' +
-      '    poster="http://vjs.zencdn.net/v/oceans.png" ' +
-      '    data-setup="{}">' +
-      '  <source src="' + source + '" type="video/mp4">' +
-      '</video>';
-
-    // replace the "#the-video" div.
-    $('#the-video').html(video);
-
-    // we need destroy the existing video.js object.
-    var player = videojs('my-video').dispose();
-    // load video.js by id of the video tag.
-    videojs("my-video", {}, function() {
+    // using the local site for testing...
+    var localSite={'baseUrl': window.location.host,
+                   'affixOffsetTop' : 290,
+                   'limit' : 3,
+                   'apiPath':'/commons/api.php'};
+    var client = new WikiStrap(localSite);
+    client.setLimit(limit);
+    client.getImagesInCategory(category, 'galleria', 
+                               function(err, content) {
+        //console.log(content);
+        $('#the-album').html(content);
+        Galleria.run('.galleria');
     });
   });
 });
@@ -78,16 +73,28 @@ jQuery(document).ready(function($) {
 
     <form class="form-horizontal">
       <div class="form-group">
-        <label for="inputSource" class="col-sm-2 control-label">Source</label>
-        <div class="col-sm-10">
-          <input type="url" class="form-control" id="inputSource" 
-                 placeholder="Media Source"
-                 value="http://vjs.zencdn.net/v/oceans.mp4">
+        <label for="inputCategory" class="col-sm-4 control-label">
+        Wiki Category
+        </label>
+        <div class="col-sm-8">
+          <input type="url" class="form-control" id="inputCategory" 
+                 placeholder="Wiki Category"
+                 value="Space Shuttle Atlantis">
         </div>
       </div>
 
       <div class="form-group">
-        <label for="inputWidth" class="col-sm-2 control-label">
+        <label for="inputLimit" class="col-sm-4 control-label">
+         Photo Limit 
+        </label>
+        <div class="col-sm-4">
+          <input type="number" class="form-control" id="inputLimit" 
+                 placeholder="Photo Limits" value="5">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputWidth" class="col-sm-4 control-label">
           Width
         </label>
         <div class="col-sm-4">
@@ -97,7 +104,7 @@ jQuery(document).ready(function($) {
       </div>
 
       <div class="form-group">
-        <label for="inputHeight" class="col-sm-2 control-label">
+        <label for="inputHeight" class="col-sm-4 control-label">
           Height
         </label>
         <div class="col-sm-4">
@@ -107,7 +114,7 @@ jQuery(document).ready(function($) {
       </div>
 
       <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-offset-4 col-sm-8">
           <button type="button" id="preview" class="btn btn-default">
           Preview
           </button>
@@ -118,17 +125,9 @@ jQuery(document).ready(function($) {
 
   <div class="col-md-8">
 
-    <h2>Minimum Requirement for HTML 5 player</h2>
+    <h2>Galleria Photo Album Preview</h2>
 
-    <div id="the-video">
-    <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
-    poster="http://vjs.zencdn.net/v/oceans.png" data-setup="{}">
-      <source src="http://vjs.zencdn.net/v/oceans.mp4" type='video/mp4'>
-      <p class="vjs-no-js">
-        To view this video please enable JavaScript, and consider upgrading to a web browser that
-        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-      </p>
-    </video>
+    <div id="the-album">
     </div>
   </div>
 
