@@ -1,7 +1,5 @@
 |travis|_ |npm-version|_ |npm-license|_
 
-|nodei|_
-
 wikistrap.js
 ============
 
@@ -44,6 +42,8 @@ Documentation
 -------------
 
 Check the `document folder <docs/README.rst>`_.
+
+|nodei|_
 
 .. |travis| image:: https://api.travis-ci.org/leocornus/wikistrap.js.png
 .. _travis: https://travis-ci.org/leocornus/wikistrap.js
