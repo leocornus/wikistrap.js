@@ -7,6 +7,11 @@ var express = require('express');
 var serveIndex = require('serve-index');
 var app = express();
 
+// set the homepage.
+app.get('/', function(req, res) {
+    res.sendFile('get-images-in-category.html', {root: __dirname + '/../../demo'});
+});
+
 //load static files.
 app.use('/demo', express.static('demo'));
 app.use('/demo', serveIndex('demo'));
@@ -29,5 +34,5 @@ var commonsApi = require('./commons-api.js');
 app.get('/commons/api.php', commonsApi);
 
 // start the express server.
-var server = app.listen(8900, function() {
+var server = app.listen(18900, function() {
 });
