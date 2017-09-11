@@ -1,0 +1,84 @@
+<html ng-app="mwdemo">
+  <head>
+    <title>Bit's Moments</title>
+
+    <script src='/bower_components/jquery/dist/jquery.min.js'></script>
+    <link rel='stylesheet' href='/bower_components/lightbox2/dist/css/lightbox.min.css'/>
+
+    <link rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css'/>
+    <script src='/bower_components/bootstrap/dist/js/bootstrap.min.js'></script>
+    <link rel='stylesheet' href='/bower_components/font-awesome/css/font-awesome.min.css'/>
+
+  <script src='/bower_components/arm-galleria/src/galleria.js'></script>
+  <script src='/bower_components/arm-galleria/src/themes/classic/galleria.classic.js'></script>
+
+    <script src='/bower_components/angular/angular.min.js'></script>
+    <link rel='stylesheet' href='/bower_components/justifiedGallery/dist/css/justifiedGallery.min.css'/>
+    <script src='/bower_components/justifiedGallery/dist/js/jquery.justifiedGallery.min.js'></script>
+
+    <script src="/src/wikistrap.js"></script>
+    <style>
+.affix {
+    top: 50px;
+}
+.image-row img {
+  width: 120px
+}
+.galleria {
+  width: 100%; 
+  height: 600px;
+  background: #000
+}
+    </style>
+    <script>
+// we need this to load protractor.
+var mwdemo = angular.module('mwdemo', []);
+
+jQuery(document).ready(function() {
+    // using the local site for testing...
+    var localSite={'baseUrl': window.location.host,
+                   'affixOffsetTop' : 290,
+                   'limit' : 9,
+                   'apiPath':'/commons/api.php'};
+    var client = new WikiStrap(localSite);
+
+    var title = 'Space Shuttle Atlantis';
+
+    // get present type:
+    var present = 'galleria';
+    //console.log(present);
+    client.getImagesInCategory(title, present, 
+                               function(err, content) {
+        //console.log(content);
+        $('#content-container').html(content);
+        //client.syncSidenavWidth();
+        //if(present == 'galleria') {
+        //    Galleria.run('.galleria');
+        //}
+        // load the gallery.
+        $(".galleria").justifiedGallery({
+            rowHeight : 250,
+            lastRow : 'justify',
+            margins : 3
+        });
+    });
+
+});
+    </script>
+  </head>
+  <body>
+<div class="container container-fluid">
+<div class="jumbotron">
+  <h1 id='demo-title'>Bit's Moments</h1>
+</div>
+
+<div id="content-container" class="container-fluid">
+</div>
+</div>
+
+<!-- we need make sure this javascript is loaded at the end of -->
+<!-- html file -->
+<script src='/bower_components/lightbox2/dist/js/lightbox.js'></script>
+
+  </body>
+</html>
