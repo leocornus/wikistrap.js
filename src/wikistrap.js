@@ -183,6 +183,8 @@
                 'cmtype' : 'file',
                 'cmprop' : 'ids|title',
                 'cmtitle' : category,
+                'cmsort' : 'timestamp',
+                'cmdir' : 'desc',
                 'cmlimit' : this.getLimit()
             };
 
