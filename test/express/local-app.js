@@ -9,7 +9,7 @@ var app = express();
 
 // set the homepage.
 app.get('/', function(req, res) {
-    res.sendFile('get-images-in-category.html', {root: __dirname + '/../../demo'});
+    res.sendFile('moments.html', {root: __dirname + '/../../demo'});
 });
 
 //load static files.
