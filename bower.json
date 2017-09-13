@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "jquery": "~2.1.4",
-    "bootstrap": "~3.3.6",
+    "bootstrap": "4.x",
     "font-awesome": "~4.5.0",
     "justifiedGallery": "^3.6.3"
   },
