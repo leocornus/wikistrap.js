@@ -26,11 +26,15 @@
     "jquery": "~2.1.4",
     "bootstrap": "4.x",
     "font-awesome": "~4.5.0",
-    "justifiedGallery": "^3.6.3"
+    "justifiedGallery": "^3.6.3",
+    "popper.js": "1.12.5"
   },
   "devDependencies": {
     "angular": "angularjs#~1.4.8",
     "lightbox2": "~2.8.2",
     "arm-galleria": "~1.4.3"
+  },
+  "resolutions": {
+    "bootstrap": "4.0.0-beta"
   }
 }
