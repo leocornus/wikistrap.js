@@ -12,6 +12,11 @@ app.get('/', function(req, res) {
     res.sendFile('moments.html', {root: __dirname + '/../../demo'});
 });
 
+// set the favicon.ico.
+app.get('/favicon.ico', function(req, res) {
+    res.sendFile('bit-circle.ico', {root: __dirname});
+});
+
 //load static files.
 app.use('/demo', express.static('demo'));
 app.use('/demo', serveIndex('demo'));
