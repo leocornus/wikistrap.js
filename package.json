@@ -50,6 +50,7 @@
     "serve-index": "^1.7.2"
   },
   "dependencies": {
-    "jquery": "^2.1.4"
+    "jquery": "^2.1.4",
+    "request": "^2.81.0"
   }
 }
