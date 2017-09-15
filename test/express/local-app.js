@@ -40,7 +40,7 @@ app.get('/commons/api.php', commonsApi);
 
 // direct images
 var imagesApi = require('./images-api.js');
-app.get('/images/', imagesApi);
+app.get(/^\/images/, imagesApi);
 
 // start the express server.
 var server = app.listen(18900, function() {
