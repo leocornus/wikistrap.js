@@ -1,7 +1,22 @@
 // direct call to WikiMedia Commons, which have lot of medias.
 var request = require('request').defaults({encoding: null});
 
-var api = function(req, res) {
+/**
+ * module is a plain JavaScript object with an exports property. 
+ * exports is a plain JavaScript variable that happens to be 
+ * set to module.exports. 
+ * At the end of your file, node.js will basically 
+ * 'return' module.exports to the require function. ... 
+ * At this time module.exports and exports pointing to the 
+ * same reference.
+ */
+
+var options = {
+  baseUrl: 'https://upload.wikimedia.org/wikipedia/commons'
+};
+
+// the callback function for express.js
+module.exports.api = function(req, res) {
 
     // get the file path:
     //var filePath = req.query.path;
@@ -11,7 +26,7 @@ var api = function(req, res) {
     // get the url to image.
     // sample file path:
     // /thumb/2/2a/Bit%27s_moments_022.jpg/750px-Bit%27s_moments_022.jpg
-    var imageUrl = 'https://upload.wikimedia.org/wikipedia/commons' + filePath;
+    var imageUrl = options.baseUrl + filePath;
     console.log(imageUrl);
 
     request.get(imageUrl, function(error, response, body) {
@@ -34,5 +49,3 @@ var api = function(req, res) {
         }
     });
 };
-
-module.exports = api;
