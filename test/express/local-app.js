@@ -40,6 +40,10 @@ app.get('/commons/api.php', commonsApi);
 
 // direct images
 var imagesApi = require('./images-api.js');
+// set options.
+imagesApi.setOptions({
+    baseUrl: 'https://upload.wikimedia.org/wikipedia/commons'
+});
 app.get(/^\/images/, imagesApi.api);
 
 // start the express server.

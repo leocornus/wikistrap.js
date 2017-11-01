@@ -12,7 +12,16 @@ var request = require('request').defaults({encoding: null});
  */
 
 var options = {
-  baseUrl: 'https://upload.wikimedia.org/wikipedia/commons'
+  // the default base url.
+  baseUrl: 'https://upload.wikimedia.org/wikipedia'
+};
+
+/**
+ * set some default options.
+ */
+module.exports.setOptions = function(opts) {
+
+    options = opts;
 };
 
 // the callback function for express.js
