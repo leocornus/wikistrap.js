@@ -40,7 +40,12 @@ app.get('/wiki/api.php', wikiApi);
 
 // direct mediawiki api call to commons.wikimedia.org
 var commonsApi = require('./commons-api.js');
-app.get('/commons/api.php', commonsApi);
+// set options.
+commonsApi.setOptions({
+    "remoteUrl": remoteUrl,
+    "localUrl" : localUrl
+});
+app.get('/commons/api.php', commonsApi.api);
 
 // direct images
 var imagesApi = require('./images-api.js');
