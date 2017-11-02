@@ -13,7 +13,7 @@
     <link rel='stylesheet' href='/bower_components/justifiedGallery/dist/css/justifiedGallery.min.css'/>
     <script src='/bower_components/justifiedGallery/dist/js/jquery.justifiedGallery.min.js'></script>
 
-    <script src="/src/wikistrap.js"></script>
+    <script src="/src/wikistrap.js?version=1.0"></script>
     <style>
 .affix {
     top: 50px;
@@ -30,11 +30,11 @@ jQuery(document).ready(function() {
     // using the local site for testing...
     var localSite={'baseUrl': window.location.host,
                    'affixOffsetTop' : 290,
-                   'limit' : 20,
+                   'limit' : 25,
                    'apiPath':'/commons/api.php'};
     var client = new WikiStrap(localSite);
 
-    var title = 'Space Shuttle Atlantis';
+    var title = "Bit's Moments";
 
     // get present type:
     var present = 'galleria';
@@ -57,11 +57,17 @@ jQuery(document).ready(function() {
 
 });
     </script>
+
   </head>
   <body>
 <div class="container container-fluid">
 <div class="jumbotron">
-  <h1 id='demo-title'>Bit's Moments</h1>
+  <div class="media">
+    <img class="d-flex mr-3" style="width:60px" src="/images/thumb/d/d4/Bit%27s_moments_036.jpg/375px-Bit%27s_moments_036.jpg" alt"Bit's Moments">
+    <div class="media-body">
+       <h1 id='demo-title'>Bit's Moments</h1>
+    </div>
+  </div>
 </div>
 
 <div id="content-container" class="container-fluid">
