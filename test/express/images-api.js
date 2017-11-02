@@ -12,8 +12,8 @@ var request = require('request').defaults({encoding: null});
  */
 
 var options = {
-  // the default base url.
-  remoteUrl: 'https://upload.wikimedia.org/wikipedia',
+  // the default base urls.
+  remoteUrl: 'https://upload.wikimedia.org/wikipedia/commons',
   localUrl: '/images'
 };
 
