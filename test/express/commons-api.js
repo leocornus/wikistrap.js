@@ -14,6 +14,8 @@ module.exports.setOptions = function(opts) {
 };
 
 var client = new bot({
+    //protocol: "http",
+    //port: 80,
     server: 'commons.wikimedia.org',
     path: '/w',
     //path: '/wiki',
