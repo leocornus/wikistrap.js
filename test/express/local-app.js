@@ -7,6 +7,10 @@ var express = require('express');
 var serveIndex = require('serve-index');
 var app = express();
 
+// some url swap.
+var remoteUrl = 'https://upload.wikimedia.org/wikipedia/commons';
+var localUrl = "/images";
+
 // set the homepage.
 app.get('/', function(req, res) {
     res.sendFile('moments.html', {root: __dirname + '/../../demo'});
@@ -42,7 +46,8 @@ app.get('/commons/api.php', commonsApi);
 var imagesApi = require('./images-api.js');
 // set options.
 imagesApi.setOptions({
-    baseUrl: 'https://upload.wikimedia.org/wikipedia/commons'
+    "remoteUrl": remoteUrl,
+    "localUrl" : localUrl
 });
 app.get(/^\/images/, imagesApi.api);
 

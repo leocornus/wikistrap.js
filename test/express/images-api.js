@@ -13,7 +13,8 @@ var request = require('request').defaults({encoding: null});
 
 var options = {
   // the default base url.
-  baseUrl: 'https://upload.wikimedia.org/wikipedia'
+  remoteUrl: 'https://upload.wikimedia.org/wikipedia',
+  localUrl: '/images'
 };
 
 /**
@@ -29,13 +30,13 @@ module.exports.api = function(req, res) {
 
     // get the file path:
     //var filePath = req.query.path;
-    var filePath = req.path.replace('/images', '');
+    var filePath = req.path.replace(options.localUrl, '');
     console.log(filePath);
 
     // get the url to image.
     // sample file path:
     // /thumb/2/2a/Bit%27s_moments_022.jpg/750px-Bit%27s_moments_022.jpg
-    var imageUrl = options.baseUrl + filePath;
+    var imageUrl = options.remoteUrl + filePath;
     console.log(imageUrl);
 
     request.get(imageUrl, function(error, response, body) {
