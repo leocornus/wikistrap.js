@@ -5,11 +5,10 @@
 var express = require('express');
 // serve-index provide directory indexing.
 var serveIndex = require('serve-index');
-var app = express();
+// local settings.
+var settings = require('./local/moments.js');
 
-// some url swap.
-var remoteUrl = 'https://upload.wikimedia.org/wikipedia/commons';
-var localUrl = "/images";
+var app = express();
 
 // set the homepage.
 app.get('/', function(req, res) {
@@ -42,8 +41,8 @@ app.get('/wiki/api.php', wikiApi);
 var commonsApi = require('./commons-api.js');
 // set options.
 commonsApi.setOptions({
-    "remoteUrl": remoteUrl,
-    "localUrl" : localUrl
+    "remoteUrl": settings.config.remoteUrl,
+    "localUrl" : settings.config.localUrl
 });
 app.get('/commons/api.php', commonsApi.api);
 
@@ -51,8 +50,8 @@ app.get('/commons/api.php', commonsApi.api);
 var imagesApi = require('./images-api.js');
 // set options.
 imagesApi.setOptions({
-    "remoteUrl": remoteUrl,
-    "localUrl" : localUrl
+    "remoteUrl": settings.config.remoteUrl,
+    "localUrl" : settings.config.localUrl
 });
 app.get(/^\/images/, imagesApi.api);
 
