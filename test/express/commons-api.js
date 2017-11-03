@@ -3,6 +3,8 @@ var bot = require('nodemw');
 
 // some options.
 var options = {
+  server: 'commons.wikimedia.org',
+  path: '/w',
   // the default base urls.
   remoteUrl: 'https://upload.wikimedia.org/wikipedia/commons',
   localUrl: '/images'
@@ -16,8 +18,8 @@ module.exports.setOptions = function(opts) {
 var client = new bot({
     //protocol: "http",
     //port: 80,
-    server: 'commons.wikimedia.org',
-    path: '/w',
+    server: options.server,
+    path: options.path,
     //path: '/wiki',
     debug: true 
 });

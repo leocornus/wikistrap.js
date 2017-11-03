@@ -41,6 +41,8 @@ app.get('/wiki/api.php', wikiApi);
 var commonsApi = require('./commons-api.js');
 // set options.
 commonsApi.setOptions({
+    "server": settings.config.server,
+    "path": settings.config.path,
     "remoteUrl": settings.config.remoteUrl,
     "localUrl" : settings.config.localUrl
 });
