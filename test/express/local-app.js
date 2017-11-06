@@ -58,5 +58,5 @@ imagesApi.setOptions({
 app.get(/^\/images/, imagesApi.api);
 
 // start the express server.
-var server = app.listen(18900, function() {
+var server = app.listen(settings.config.expressPort, function() {
 });
