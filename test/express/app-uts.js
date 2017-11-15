@@ -29,6 +29,17 @@ app.get('/', function(req, res) {
     res.sendFile('uts.html', {root: __dirname + '/../../demo'});
 });
 
+// direct mediawiki api call to commons.wikimedia.org
+var commonsApi = require('./commons-api.js');
+// set options.
+commonsApi.setOptions({
+    "server": settings.config.server,
+    "path": settings.config.path,
+    "remoteUrl": settings.config.remoteUrl,
+    "localUrl" : settings.config.localUrl
+});
+app.get('/commons/api.php', commonsApi.api);
+
 // direct images
 var imagesApi = require('./images-api.js');
 // set options.
