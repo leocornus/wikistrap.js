@@ -11,23 +11,27 @@ var options = {
 };
 
 module.exports.setOptions = function(opts) {
-
   options = opts
 };
 
-var client = new bot({
-    //protocol: "http",
-    //port: 80,
-    server: options.server,
-    path: options.path,
-    //path: '/wiki',
-    debug: true 
-});
+var client = null;
 
 /**
  * the express callback funtion.
 */
 module.exports.api = function(req, res) {
+
+    if(client == null) {
+
+        client = new bot({
+            //protocol: "http",
+            //port: 80,
+            server: options.server,
+            path: options.path,
+            //path: '/wiki',
+            debug: true 
+        });
+    }
 
     //console.log(req.query);
 
