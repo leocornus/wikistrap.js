@@ -8,7 +8,6 @@
     "test": "test"
   },
   "scripts": {
-    "postinstall": "bower install",
     "test": "gulp",
     "unit-test": "gulp unit-test",
     "e2e-test": "gulp e2e-test",
