@@ -1,5 +1,11 @@
 // direct call to WikiMedia Commons, which have lot of medias.
-var request = require('request').defaults({encoding: null});
+var request = require('request').defaults(
+{
+  encoding: null,
+  headers: {
+    'User-Agent': 'WikiStrap.js'
+  }
+});
 
 /**
  * module is a plain JavaScript object with an exports property. 

@@ -29,6 +29,8 @@ module.exports.api = function(req, res) {
             server: options.server,
             path: options.path,
             //path: '/wiki',
+            // set the user agent to
+            userAgent: "WikiStrap.js",
             debug: true 
         });
     }
