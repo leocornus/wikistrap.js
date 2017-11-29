@@ -1,6 +1,6 @@
 {
   "name": "wikistrap.js",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "comprehensive JavaScript sdk to MediaWiki APIs",
   "main": "src/wikistrap.js",
   "directories": {
